@@ -1,0 +1,16 @@
+<header class="py-4">
+    <nav class="flex justify-between items-center">
+        <h1>Invoice Generator</h1>
+        <ul>
+            <li>
+                <button (click)="toggleTheme()" class="dark:bg-white bg-black rounded-xl p-2 flex justify-center items-center">
+                    @if (isDarkMode) {
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" class="dark:text-black" fontIcon="dark_mode"></mat-icon>
+                    } @else {
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" class="text-white" fontIcon="light_mode"></mat-icon>
+                    }
+                </button>
+            </li>
+        </ul>
+    </nav>
+</header>
