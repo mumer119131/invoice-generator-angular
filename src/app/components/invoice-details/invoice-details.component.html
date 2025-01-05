@@ -5,7 +5,7 @@
         <label for="logo-upload" class="cursor-pointer border-[1px] border-gray-700 rounded-md p-4 inline-flex flex-col items-center justify-center gap-2">
             <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="image"></mat-icon>
             <span class="ml-2 block text-xs">Upload Logo</span>
-            <input id="logo-upload" type="file" accept="image/*" style="display: none;" [formControlName]="'invoiceLogo'" />
+            <input id="logo-upload" type="file" accept="image/*" style="display: none;"  (change)="handleLogoChange($event)"/>
         </label>
     </div>
     <div class="flex items-center gap-4 mt-2 justify-between">

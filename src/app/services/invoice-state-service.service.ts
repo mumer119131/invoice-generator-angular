@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
+import { AllDetails, BillingInfo, InvoiceDetails, PaymentInfo } from '../types/generator.types';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,7 @@ export class InvoiceService {
   private toDetailsForm: FormGroup;
   private itemsForm: FormGroup;
 
+  private invoiceDataSubject = new BehaviorSubject<AllDetails | null>(null);
   invoiceDetails$ = new BehaviorSubject<any>(null);
   paymentInfo$ = new BehaviorSubject<any>(null);
   fromDetails$ = new BehaviorSubject<any>(null);
@@ -26,6 +28,7 @@ export class InvoiceService {
     this.toDetailsForm = this.initDetailsForm();
     this.itemsForm = this.initItemsForm();
     
+
     // Subscribe to form changes and emit updates
     this.invoiceDetailsForm.valueChanges.subscribe((value) =>
       this.invoiceDetails$.next(value)
@@ -48,7 +51,7 @@ export class InvoiceService {
   getItemsForm(): FormGroup {
     return this.itemsForm;
   }
-  
+
   private initInvoiceDetailsForm(): FormGroup {
     return this.fb.group({
       invoiceNumber: ['', Validators.required],
@@ -56,6 +59,7 @@ export class InvoiceService {
       dueDate: ['', Validators.required],
       currency: ['USD', Validators.required],
       invoiceLogo: ['', Validators.required],
+
     });
   }
 
@@ -85,6 +89,36 @@ export class InvoiceService {
     });
   }
 
+  getInvoiceDataObservable() {
+    return this.invoiceDataSubject.asObservable();
+  }
+
+
+
+  updateInvoiceData(updatedData: Partial<any>) {
+    const currentData = this.invoiceDataSubject.value;
+    const updatedInvoiceData: AllDetails = {
+      ...currentData,
+      ...updatedData,
+      toDetails: updatedData['toDetails'] ?? currentData?.['toDetails'] ?? {} as BillingInfo,
+      fromDetails: updatedData['fromDetails'] ?? currentData?.['fromDetails'] ?? {} as BillingInfo,
+      paymentInfo: updatedData['paymentInfo'] ?? currentData?.['paymentInfo'] ?? {} as PaymentInfo,
+      invoiceDetails: updatedData['invoiceDetails'] ?? currentData?.['invoiceDetails'] ?? {} as InvoiceDetails,
+      items: updatedData['items'] ?? currentData?.['items'] ?? [] as any[],
+    };
+    this.invoiceDataSubject.next(updatedInvoiceData);
+  }
+  setFromData(data: any) {
+    this.updateInvoiceData({ from: data });
+  }
+
+  setToData(data: any) {
+    this.updateInvoiceData({ to: data });
+  }
+
+  setPaymentInfo(data: any) {
+    this.updateInvoiceData({ paymentInfo: data });
+  }
   getItemsFormArray(): FormArray {
     return this.itemsForm.get('items') as FormArray;
   }

@@ -21,5 +21,12 @@ export class FromAndToComponent {
   constructor(private invoiceService: InvoiceService) {
     this.fromDetailsForm = this.invoiceService.getForm('fromDetails');
     this.toDetailsForm = this.invoiceService.getForm('toDetails');
+    this.fromDetailsForm.valueChanges.subscribe((value) => {
+      this.invoiceService.updateInvoiceData({ fromDetails: value });
+    });
+    this.toDetailsForm.valueChanges.subscribe((value) => {
+      this.invoiceService.updateInvoiceData({ toDetails: value });
+    });
   }
+  
 }

@@ -18,11 +18,15 @@ export class ItemsComponent {
     // Retrieve the FormArray from the service
     this.itemsFormArray = this.invoiceService.getItemsFormArray();
     
+    // Emit the form value whenever there's a change
+    this.itemsForm.valueChanges.subscribe((value) => {
+      this.invoiceService.updateInvoiceData({ items: value.items });
+    });
   }
   get itemsForm(): FormGroup {
     return this.invoiceService.getItemsForm();
   }
-  
+
   addItem(): void {
     // Use the service to add an item
     this.invoiceService.addItem({});
@@ -39,5 +43,14 @@ export class ItemsComponent {
     const quantity = itemGroup.get('quantity')?.value || 0;
     const price = itemGroup.get('price')?.value || 0;
     itemGroup.get('total')?.setValue(quantity * price, { emitEvent: false });
+    this.invoiceService.updateInvoiceData({ items: this.itemsForm.value.items });
+  }
+
+    // Subscribe to valueChanges to update the service when the form data changes
+  ngOnInit() {
+    this.itemsForm.valueChanges.subscribe((value) => {
+      console.log(value);  // Make sure you can see the updated data
+      this.invoiceService.updateInvoiceData({ items: value.items });
+    });
   }
 }

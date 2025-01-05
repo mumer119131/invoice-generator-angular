@@ -1,12 +1,11 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
 import { ThemeService } from '../../services/theme.service';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, MatIconModule],
+  imports: [MatIconModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

@@ -13,21 +13,7 @@ import { AllDetails, BillingInfo } from '../types/generator.types';
 })
 
 export class HomeComponent {
-  defaultToFrom = {
-    name: '',
-    address: '',
-    zip: '',
-    city: '',
-    country: '',
-    email: '',
-    phone: '',
-    other: [],
-  }
+
+
   
-
-  allDetails = signal<AllDetails>({
-    toDetails: this.defaultToFrom,
-    fromDetails: this.defaultToFrom,
-  });
-
 }
