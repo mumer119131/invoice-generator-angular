@@ -5,22 +5,36 @@ import { FromAndToComponent } from '../from-and-to/from-and-to.component';
 import { InvoiceDetailsComponent } from '../invoice-details/invoice-details.component';
 import { PaymentInfoComponent } from '../payment-info/payment-info.component';
 import { SummaryComponent } from '../summary/summary.component';
+import { ItemsComponent } from "../../items/items.component";
 
 
 
 @Component({
   selector: 'app-generator',
-  imports: [ButtonComponent, FromAndToComponent, InvoiceDetailsComponent, PaymentInfoComponent, SummaryComponent],
+  imports: [ButtonComponent, FromAndToComponent, InvoiceDetailsComponent, PaymentInfoComponent, SummaryComponent, ItemsComponent],
   templateUrl: './generator.component.html',
   styleUrl: './generator.component.scss'
 })
 export class GeneratorComponent implements OnInit{
-  toDetails = { name: 'Umer', address: '', zip: '', city: '', country: '', email: '', phone: '', other: [] };
-  fromDetails = { name: 'Umer', address: '', zip: '', city: '', country: '', email: '', phone: '', other: [] };
+  defaultDetails = {
+      name: 'Umer Khan',
+      address:'Sample # 342 Jaranwala',
+      zip: '37250',
+      city: 'Faisalabad',
+      country: 'Pakistan',
+      email: 'mumer119131@gmail.com',
+      phone: '+923456013122',
+      other: [],
+    }
+  // toDetails = { name: 'Umer', address: '', zip: '', city: '', country: '', email: '', phone: '', other: [] };
+  // fromDetails = { name: 'Umer', address: '', zip: '', city: '', country: '', email: '', phone: '', other: [] };
+
+  toDetails = this.defaultDetails;
+  fromDetails = this.defaultDetails;
   @Input() allDetails?: AllDetails;
 
-  menuItems = [{ name: 'From & To', value: 'from&to' }, { name: 'Invoice Details', value: 'invoice' }, { name: 'Payment Info', value: 'payment' }, { name: 'Summary', value: 'summary' }] as MenuItemsList;
-  currentSelectedMenu = signal<string>('from&to')
+  menuItems = [{ name: 'From & To', value: 'from&to' }, { name: 'Invoice Details', value: 'invoice' }, {name: 'Line Items', value: 'items'}, { name: 'Payment Info', value: 'payment' }, { name: 'Summary', value: 'summary' }] as MenuItemsList;
+  currentSelectedMenu = signal<string>('payment')
 
 
   updateAllDetails() {
@@ -43,6 +57,10 @@ export class GeneratorComponent implements OnInit{
     // You can also pass this data to other components or perform calculations here
   }
 
+  handleInvoiceDetailsChange(details: any) {
+    console.log('Updated invoice details:', details);
+    // You can also pass this data to other components or perform calculations here
+  }
   getMenuClickHandler(value: MenuItems): () => void {
     this.currentSelectedMenu.set(value);
     return () => {

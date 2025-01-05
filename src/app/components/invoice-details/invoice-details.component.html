@@ -1,1 +1,33 @@
-<p>invoice-details works!</p>
+
+<form [formGroup]="invoiceDetailsForm" class="w-max">
+    <div class="flex items-center gap-4">
+        <h4 class="text-sm">Invoice Logo: </h4>
+        <label for="logo-upload" class="cursor-pointer border-[1px] border-gray-700 rounded-md p-4 inline-flex flex-col items-center justify-center gap-2">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="image"></mat-icon>
+            <span class="ml-2 block text-xs">Upload Logo</span>
+            <input id="logo-upload" type="file" accept="image/*" (change)="handleLogoChange($event)" style="display: none;" />
+        </label>
+    </div>
+    <div class="flex items-center gap-4 mt-2 justify-between">
+        <h4 class="text-sm flex-grow">Invoice Id: </h4>
+        <input class="dark:bg-black last:border-gray-900 border-[1px] p-2 rounded-lg text-xs" placeholder="Enter Invoice Logo URL" [formControlName]="'invoiceNumber'" />
+    </div>
+    <div class="flex items-center gap-4 mt-2 justify-between">
+        <h4 class="text-sm flex-grow">Issue Date: </h4>
+        <input class="dark:bg-black last:border-gray-900 border-[1px] p-2 rounded-lg text-xs w-[10rem]" type="date" placeholder="Enter Invoice Logo URL" [formControlName]="'invoiceDate'" />
+    </div>
+    <div class="flex items-center gap-4 mt-2 justify-between">
+        <h4 class="text-sm flex-grow">Due Date: </h4>
+        <input class="dark:bg-black last:border-gray-900 border-[1px] p-2 rounded-lg text-xs w-[10rem]" type="date" placeholder="Enter Invoice Logo URL" [formControlName]="'invoiceNumber'" />
+    </div>
+    <div class="flex items-center gap-4 mt-2 justify-between">
+        <h4 class="text-sm flex-grow">Currency: </h4>
+        <select class="dark:bg-black last:border-gray-900 border-[1px] p-2 rounded-lg text-xs w-[10rem]" [formControlName]="'currency'">
+            <ng-container *ngFor="let item of currencyOptions">
+                <option [value]="item.key">
+                    {{ item.value.name }} ({{ item.value.code }}) @if (invoiceDetailsForm.get("currency")?.value === item.key) {<span>✔️</span>}
+                </option>
+            </ng-container>
+        </select>
+    </div>
+</form>

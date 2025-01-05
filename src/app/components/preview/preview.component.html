@@ -2,13 +2,31 @@
     <h2 class="outfit-font uppercase font-bold text-xl">Preview</h2>
     <p class="text-xs">Preview your invoice</p>
 
-    <div class="bg-white text-black rounded-lg mt-4 p-8 flex justify-between">
-        <h4 class="outfit-font text-2xl font-bold text-blue-600">{{allDetails().fromDetails.name}}</h4>
-        <div>
-            <h4 class="text-3xl font-semibold">Invoice #</h4>
-            <p class="text-xs text-right mt-4">{{allDetails().fromDetails.address}}</p>
-            <p class="text-xs text-right">{{allDetails().fromDetails.zip}},{{allDetails().fromDetails.city}}</p>
-            <p class="text-xs text-right">{{allDetails().fromDetails.country}}</p>
+    <div class="bg-white text-black rounded-lg mt-4 p-8 ">
+        <div class="flex justify-between">
+            <h4 class="outfit-font text-2xl font-bold text-blue-600">{{allDetails().fromDetails.name}}</h4>
+            <div>
+                <h4 class="text-3xl font-semibold text-right">Invoice #</h4>
+                <p class="text-sm text-right mt-4 text-gray-700">{{allDetails().fromDetails.address}}</p>
+                <p class="text-sm text-right text-gray-700">{{allDetails().fromDetails.zip}}, {{allDetails().fromDetails.city}}</p>
+                <p class="text-sm text-right text-gray-700">{{allDetails().fromDetails.country}}</p>
+            </div>
+        </div>
+        <div class="flex justify-between mt-6">
+            <div>
+                <h4 class="text-sm font-semibold outfit-font">Bill To:</h4>
+                <p class="text-xl font-semibold outfit-font">{{allDetails().toDetails.name}}</p>
+
+                <p class="text-gray-700 text-sm mt-2">{{allDetails().toDetails.address}}</p>
+                <p class="text-gray-700 text-sm">{{allDetails().toDetails.zip}},{{allDetails().toDetails.city}}</p>
+                <p class="text-gray-700 text-sm">{{allDetails().toDetails.country}}</p>
+                
+            </div>
+            <div>
+                <p class="text-sm text-gray-700 mt-2 text-right"><span class="font-bold">Invoice Date: </span> 12 Sep 2025</p>
+                <p class="text-sm text-gray-700 text-right"><span class="font-bold">Due Date: </span> 12 Sep 2025</p>
+            </div>
         </div>
     </div>
+    
 </div>

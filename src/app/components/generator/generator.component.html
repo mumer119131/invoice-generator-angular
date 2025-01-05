@@ -14,7 +14,10 @@
                 <app-from-and-to (toDetailsChanged)="handleToDetailsChange($event)" (fromDetailsChanged)="handleFromDetailsChange($event)"></app-from-and-to>
             }
             @case ('invoice') {
-                <app-invoice-details></app-invoice-details>
+                <app-invoice-details (invoiceDetailsChanged)="handleInvoiceDetailsChange($event)"></app-invoice-details>
+            }
+            @case ('items') {
+                <app-items></app-items>
             }
             @case ('payment') {
                 <app-payment-info></app-payment-info>

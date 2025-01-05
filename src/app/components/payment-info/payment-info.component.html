@@ -1,1 +1,20 @@
-<p>payment-info works!</p>
+
+
+
+<form [formGroup]="paymentInformationForm">
+    <h2>Payment Information:</h2>
+    <div class="flex gap-4 mt-4">
+        <div class="mt-4 flex flex-col gap-1">
+            <p class="text-xs">Bank Name</p>
+            <input type="text" formControlName="bankName" placeholder="Bank Name" cols="1" class="dark:bg-black border-gray-900 border-[1px] p-2 rounded-lg text-xs w-[10rem]">
+        </div>
+        <div class="mt-4 flex flex-col gap-1">
+            <p class="text-xs">Account Name</p>
+            <input type="text" formControlName="accountName" placeholder="Bank Name" cols="1" class="dark:bg-black border-gray-900 border-[1px] p-2 rounded-lg text-xs w-[10rem]">
+        </div>
+    </div>
+    <div class="mt-4 flex flex-col gap-1">
+        <p class="text-xs">Account Number</p>
+        <input type="text" formControlName="accountNumber" placeholder="Bank Name" cols="1" class="dark:bg-black border-gray-900 border-[1px] p-2 rounded-lg text-xs w-[10rem]">
+    </div>
+</form>

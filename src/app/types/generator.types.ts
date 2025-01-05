@@ -1,6 +1,6 @@
 
 
-export type MenuItems = 'from&to' | 'invoice' | 'payment' | 'summary';
+export type MenuItems = 'from&to' | 'invoice' | 'items' | 'payment' | 'summary';
 
 export type MenuItemsList = Array<{ name: string, value: MenuItems }>;
 
@@ -19,4 +19,13 @@ export type BillingInfo = {
 export interface AllDetails {
     toDetails: BillingInfo;
     fromDetails: BillingInfo;
+}
+
+export interface Items {
+    id: number;
+    name: string;
+    quantity: number;
+    price: number;
+    total: number;
+    description: string;
 }
