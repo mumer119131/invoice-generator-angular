@@ -11,10 +11,10 @@
         
         @switch (currentSelectedMenu()) {
             @case ('from&to') {
-                <app-from-and-to (toDetailsChanged)="handleToDetailsChange($event)" (fromDetailsChanged)="handleFromDetailsChange($event)"></app-from-and-to>
+                <app-from-and-to ></app-from-and-to>
             }
             @case ('invoice') {
-                <app-invoice-details (invoiceDetailsChanged)="handleInvoiceDetailsChange($event)"></app-invoice-details>
+                <app-invoice-details ></app-invoice-details>
             }
             @case ('items') {
                 <app-items></app-items>

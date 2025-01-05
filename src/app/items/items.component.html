@@ -1,9 +1,18 @@
 <div [formGroup]="itemsForm">
     <h2>Items:</h2>
     <div formArrayName="items">
-      <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="item-form flex flex-col gap-4 mt-4 border-gray-900 border-[1px] px-2 py-2 rounded-lg">
+      <div
+        *ngFor="let item of itemsFormArray.controls; let i = index"
+        [formGroupName]="i"
+        class="item-form flex flex-col gap-4 mt-4 border-gray-900 border-[1px] px-2 py-2 rounded-lg"
+      >
         <div class="flex gap-4 items-center">
-          <input type="text" formControlName="name" placeholder="Item Name" class="dark:bg-black border-gray-900 border-[1px] p-2 rounded-lg text-xs w-[10rem]" />
+          <input
+            type="text"
+            formControlName="name"
+            placeholder="Item Name"
+            class="dark:bg-black border-gray-900 border-[1px] p-2 rounded-lg text-xs w-[10rem]"
+          />
           <input
             type="number"
             formControlName="quantity"
@@ -16,19 +25,41 @@
             formControlName="price"
             placeholder="Price"
             (input)="calculateTotal(i)"
-            class="dark:bg-black  border-gray-900 border-[1px] p-2 rounded-lg text-xs w-[10rem]"
+            class="dark:bg-black border-gray-900 border-[1px] p-2 rounded-lg text-xs w-[10rem]"
           />
-          
         </div>
-        <div class="flex gap-4 items-stretch">
-            <input type="number" formControlName="total" placeholder="Total" class="dark:bg-black border-gray-900 border-[1px] p-2 rounded-lg text-xs w-[10rem]" />
-            <input type="text" formControlName="description" placeholder="Description" cols="1" class="dark:bg-black border-gray-900 border-[1px] p-2 rounded-lg text-xs w-[10rem]">
-            @if (items.controls.length !== 1) {
-                <button type="button" class="bg-red-500 rounded-md px-2 flex justify-center items-center m-h-full w-[10rem] text-sm" (click)="removeItem(i)"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="delete"></mat-icon> Remove</button>
-            }
+  
+        <div class="flex gap-4 items-center">
+          <input
+            type="number"
+            formControlName="total"
+            placeholder="Total"
+            class="dark:bg-black border-gray-900 border-[1px] p-2 rounded-lg text-xs w-[10rem]"
+          />
+          <input
+            type="text"
+            formControlName="description"
+            placeholder="Description"
+            class="dark:bg-black border-gray-900 border-[1px] p-2 rounded-lg text-xs w-[10rem]"
+          />
+          <button
+            *ngIf="itemsFormArray.controls.length > 1"
+            type="button"
+            class="bg-red-500 text-white rounded-md px-2 flex justify-center items-center w-[10rem] text-sm"
+            (click)="removeItem(i)"
+          >
+            <mat-icon fontIcon="delete"></mat-icon> Remove
+          </button>
         </div>
       </div>
     </div>
-    <button type="button" class="bg-white text-gray-900 w-full rounded-md py-1 mt-4 text-sm font-semibold flex justify-center items-center" (click)="addItem()"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="add"></mat-icon> Add Item</button>
+  
+    <button
+      type="button"
+      class="bg-white text-gray-900 w-full rounded-md py-1 mt-4 text-sm font-semibold flex justify-center items-center"
+      (click)="addItem()"
+    >
+      <mat-icon fontIcon="add"></mat-icon> Add Item
+    </button>
   </div>
   
