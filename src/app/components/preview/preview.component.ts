@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input, OnInit } from '@angular/core';
+import { AllDetails } from '../../types/generator.types';
 
 @Component({
   selector: 'app-preview',
@@ -6,6 +7,13 @@ import { Component } from '@angular/core';
   templateUrl: './preview.component.html',
   styleUrl: './preview.component.scss'
 })
-export class PreviewComponent {
+export class PreviewComponent implements OnInit {
+  allDetails = input.required<AllDetails>();
+  constructor() {
+  }
 
+  ngOnInit() {
+    console.log('All details:', this.allDetails());
+  }
+  
 }

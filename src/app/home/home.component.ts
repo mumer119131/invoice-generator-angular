@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { HeaderComponent } from '../components/header/header.component';
 import { FooterComponent } from '../components/footer/footer.component';
 import { GeneratorComponent } from '../components/generator/generator.component';
 import { PreviewComponent } from '../components/preview/preview.component';
+import { AllDetails, BillingInfo } from '../types/generator.types';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,23 @@ import { PreviewComponent } from '../components/preview/preview.component';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
+
 export class HomeComponent {
+  defaultToFrom = {
+    name: '',
+    address: '',
+    zip: '',
+    city: '',
+    country: '',
+    email: '',
+    phone: '',
+    other: [],
+  }
+  
+
+  allDetails = signal<AllDetails>({
+    toDetails: this.defaultToFrom,
+    fromDetails: this.defaultToFrom,
+  });
 
 }

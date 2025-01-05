@@ -1,22 +1,27 @@
 <div class="basis-1/2 flex-grow border-gray-900 border-[1px] p-4 rounded-lg">
     <h2 class="outfit-font uppercase font-bold text-xl">Invoice</h2>
     <p class="text-xs">Generate Invoices</p>
-    <div class="flex gap-2 mt-2">
+    <div class="flex gap-2 mt-4">
         @for (item of menuItems; track item.value) {
-            <app-button (click)="getMenuClickHandler(item.value)" class="{{currentSelectedMenu() == item.value ? 'bg-white text-black' : ''}}">{{item.name}}</app-button>
+            <app-button (click)="getMenuClickHandler(item.value)" class="{{currentSelectedMenu() === item.value ? 'dark:bg-white dark:text-black bg-black text-white ' : 'dark:hover:bg-gray-900 hover:bg-gray-300'}}">{{item.name}}</app-button>
         }
 
     </div>
     <div class="mt-4">
-        @if (currentSelectedMenu() === 'from&to') {
-            <app-from-and-to></app-from-and-to>
-        }
+        
         @switch (currentSelectedMenu()) {
             @case ('from&to') {
-                <app-from-and-to></app-from-and-to>
-                break;
+                <app-from-and-to (toDetailsChanged)="handleToDetailsChange($event)" (fromDetailsChanged)="handleFromDetailsChange($event)"></app-from-and-to>
             }
-            
+            @case ('invoice') {
+                <app-invoice-details></app-invoice-details>
+            }
+            @case ('payment') {
+                <app-payment-info></app-payment-info>
+            }
+            @case ('summary') {
+                <app-summary></app-summary>
+            }
             @default {
                 <app-from-and-to></app-from-and-to>
             }

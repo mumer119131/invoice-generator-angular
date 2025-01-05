@@ -1,1 +1,23 @@
-<p>from-and-to works!</p>
+
+
+
+<div class="flex gap-8">
+    <form [formGroup]="toDetailsForm">
+        <h2>From:</h2>
+        @for (field of billingDetailsFields; track field.key) {
+            <div class="flex gap-2 items-center mt-2">
+                <label class="text-xs capitalize flex-grow">{{field.key}}:</label>
+                <input class="dark:bg-black last:border-gray-900 border-[1px] p-2 rounded-lg text-xs" type="text" placeholder="Your {{field.placeholder}}" [formControlName]="field.key"/>
+            </div>
+        }
+    </form>
+    <form [formGroup]="fromDetailsForm">
+        <h2>To:</h2>
+        @for (field of billingDetailsFields; track field.key) {
+            <div class="flex gap-2 items-center mt-2">
+                <label class="text-xs capitalize flex-grow">{{field.key}}:</label>
+                <input class="dark:bg-black last:border-gray-900 border-[1px] p-2 rounded-lg text-xs" type="text" placeholder="Receiver {{field.placeholder}}" [formControlName]="field.key"/>
+            </div>
+        }
+    </form>
+</div>

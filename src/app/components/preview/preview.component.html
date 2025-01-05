@@ -1,1 +1,14 @@
-<p>preview works!</p>
+<div class="basis-1/2 flex-grow border-gray-900 border-[1px] p-4 rounded-lg">
+    <h2 class="outfit-font uppercase font-bold text-xl">Preview</h2>
+    <p class="text-xs">Preview your invoice</p>
+
+    <div class="bg-white text-black rounded-lg mt-4 p-8 flex justify-between">
+        <h4 class="outfit-font text-2xl font-bold text-blue-600">{{allDetails().fromDetails.name}}</h4>
+        <div>
+            <h4 class="text-3xl font-semibold">Invoice #</h4>
+            <p class="text-xs text-right mt-4">{{allDetails().fromDetails.address}}</p>
+            <p class="text-xs text-right">{{allDetails().fromDetails.zip}},{{allDetails().fromDetails.city}}</p>
+            <p class="text-xs text-right">{{allDetails().fromDetails.country}}</p>
+        </div>
+    </div>
+</div>

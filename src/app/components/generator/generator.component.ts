@@ -1,27 +1,58 @@
-import { Component, signal } from '@angular/core';
+import { Component, Input, OnInit, signal } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
-import { MenuItems, MenuItemsList } from '../../types/generator.types';
+import { MenuItems, MenuItemsList, AllDetails } from '../../types/generator.types';
 import { FromAndToComponent } from '../from-and-to/from-and-to.component';
+import { InvoiceDetailsComponent } from '../invoice-details/invoice-details.component';
+import { PaymentInfoComponent } from '../payment-info/payment-info.component';
+import { SummaryComponent } from '../summary/summary.component';
+
+
 
 @Component({
   selector: 'app-generator',
-  imports: [ButtonComponent, FromAndToComponent],
+  imports: [ButtonComponent, FromAndToComponent, InvoiceDetailsComponent, PaymentInfoComponent, SummaryComponent],
   templateUrl: './generator.component.html',
   styleUrl: './generator.component.scss'
 })
-export class GeneratorComponent {
+export class GeneratorComponent implements OnInit{
+  toDetails = { name: 'Umer', address: '', zip: '', city: '', country: '', email: '', phone: '', other: [] };
+  fromDetails = { name: 'Umer', address: '', zip: '', city: '', country: '', email: '', phone: '', other: [] };
+  @Input() allDetails?: AllDetails;
+
   menuItems = [{ name: 'From & To', value: 'from&to' }, { name: 'Invoice Details', value: 'invoice' }, { name: 'Payment Info', value: 'payment' }, { name: 'Summary', value: 'summary' }] as MenuItemsList;
   currentSelectedMenu = signal<string>('from&to')
 
 
-  getMenuClickHandler(value: MenuItems): () => void {
-    console.log('Menu clicked', value);
-    return () => this.handleMenuClick(value);
+  updateAllDetails() {
+    if (this.allDetails) {
+      this.allDetails.toDetails = this.toDetails;
+      this.allDetails.fromDetails = this.fromDetails;
+    }
   }
 
-  handleMenuClick = (item: MenuItems) => {
-    this.currentSelectedMenu.set(item);
-    console.log('Menu clicked', item);
+  handleToDetailsChange(details: any) {
+    this.toDetails = details;
+    console.log('Updated billing details:', this.toDetails);
+    this.updateAllDetails();
+    // You can also pass this data to other components or perform calculations here
   }
+  handleFromDetailsChange(details: any) {
+    console.log('Updated billing details:', this.fromDetails);
+    this.fromDetails = details;
+    this.updateAllDetails();
+    // You can also pass this data to other components or perform calculations here
+  }
+
+  getMenuClickHandler(value: MenuItems): () => void {
+    this.currentSelectedMenu.set(value);
+    return () => {
+      
+    }
+  }
+
+  ngOnInit() {
+    this.updateAllDetails();
+  }
+
 
 }
