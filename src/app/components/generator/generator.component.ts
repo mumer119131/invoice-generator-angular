@@ -18,7 +18,7 @@ import { ItemsComponent } from "../../items/items.component";
 export class GeneratorComponent{
   
   menuItems = [{ name: 'From & To', value: 'from&to' }, { name: 'Invoice Details', value: 'invoice' }, {name: 'Line Items', value: 'items'}, { name: 'Payment Info', value: 'payment' }, { name: 'Summary', value: 'summary' }] as MenuItemsList;
-  currentSelectedMenu = signal<string>('from&to')
+  currentSelectedMenu = signal<string>('summary')
 
   getMenuClickHandler(menuItem: MenuItems) {
       this.currentSelectedMenu.set(menuItem)

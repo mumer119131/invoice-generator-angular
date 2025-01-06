@@ -1,1 +1,55 @@
-<p>summary works!</p>
+
+
+<form [formGroup]="summaryForm">
+    
+    <div class="flex gap-4">
+        @for (field of visibilityFields; track $index) {
+            <label class="inline-flex items-center cursor-pointer flex-col gap-1">
+                <span class="text-xs font-medium text-gray-900 dark:text-gray-300 capitalize">{{field.key}}</span>
+                <input type="checkbox" [checked]="field.isCheck" [formControl]="field.formControl" (change)="handleVisibilityChange($event,field.key)" class="sr-only peer">
+                <div class="relative w-11 h-6 bg-gray-400 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-gray-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full dark:peer-checked:after:border-black peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] dark:after:bg-black after:bg-white dark:after:border-black after:border-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 dark:peer-checked:bg-white peer-checked:bg-black"></div>
+            </label>
+        }
+
+    </div>
+    <div class="flex flex-col justify-between w-max">
+        @if (isTaxValue) {
+            <div class="flex gap-4 items-center mt-2 w-full">
+                <label class="text-xs capitalize flex-grow">Tax:</label>
+                <input class="dark:bg-black last:border-gray-900 border-[1px] p-2 rounded-lg w-[10rem] text-xs" type="number" [formControlName]="'tax'"/>
+            </div>
+        }
+        @if (isDiscountValue) {
+            <div class="flex gap-4 items-center mt-2 w-full">
+                <label class="text-xs capitalize flex-grow">Discount:</label>
+
+                <input class="dark:bg-black last:border-gray-900 border-[1px] p-2 rounded-lg w-[10rem] text-xs" type="number" [formControlName]="'discount'"/>
+            </div>
+        }
+        @if (isShippingValue) {
+            <div class="flex gap-4 items-center mt-2 w-full">
+                <label class="text-xs capitalize flex-grow">Shipping:</label>
+                <input class="dark:bg-black last:border-gray-900 border-[1px] p-2 rounded-lg w-[10rem] text-xs" type="number" [formControlName]="'shipping'"/>
+            </div>
+        }
+        <div class="flex gap-4 items-center mt-2 w-full">
+            <label class="text-xs capitalize flex-grow">Additional <br> Notes:</label>
+            <textarea class="dark:bg-black last:border-gray-900 border-[1px] p-2 rounded-lg w-[10rem] text-xs" type="text" [formControlName]="'additionalInfo'"></textarea>
+        </div>
+        <div class="flex gap-4 items-center mt-2 w-full">
+            <label class="text-xs capitalize flex-grow">Payment <br> Terms:</label>
+            <textarea class="dark:bg-black last:border-gray-900 border-[1px] p-2 rounded-lg w-[10rem] text-xs" type="text" [formControlName]="'paymentTerms'"></textarea>
+        </div>
+        <div class="flex items-center gap-4 mt-2">
+            <h4 class="text-sm">Signature: </h4>
+            <label for="logo-upload" class="cursor-pointer border-[1px] border-gray-700 rounded-md p-4 inline-flex flex-col items-center justify-center gap-2 w-[10rem]">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="image"></mat-icon>
+                <span class="ml-2 block text-xs">Upload Logo</span>
+                <input id="logo-upload" type="file" accept="image/*" style="display: none;"  (change)="handleSignatureChange($event)"/>
+            </label>
+        </div>
+    </div>
+    
+    
+  
+</form>

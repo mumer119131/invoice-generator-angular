@@ -21,6 +21,7 @@ export class ItemsComponent {
     // Emit the form value whenever there's a change
     this.itemsForm.valueChanges.subscribe((value) => {
       this.invoiceService.updateInvoiceData({ items: value.items });
+      this.invoiceService.updateSubTotal();
     });
   }
   get itemsForm(): FormGroup {

@@ -15,5 +15,8 @@ export class PaymentInfoComponent {
 
   constructor(private invoiceService: InvoiceService) {
     this.paymentInformationForm = this.invoiceService.getForm('paymentInfo');
+    this.paymentInformationForm.valueChanges.subscribe((value) => {
+      this.invoiceService.updateInvoiceData({ paymentInfo: value });
+    });
   }
 }

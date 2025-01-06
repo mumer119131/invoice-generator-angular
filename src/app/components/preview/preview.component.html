@@ -13,10 +13,10 @@
                 </div>
                 <div>
                     <h4 class="text-3xl font-semibold text-right">Invoice #</h4>
-                    <p class="text-sm text-right text-gray-500">{{allDetails.invoiceDetails.invoiceNumber}}</p>
-                    <p class="text-sm text-right mt-4 text-gray-700">{{allDetails.fromDetails.address}}</p>
-                    <p class="text-sm text-right text-gray-700">{{allDetails.fromDetails.zip}}, {{allDetails.fromDetails.city}}</p>
-                    <p class="text-sm text-right text-gray-700">{{allDetails.fromDetails.country}}</p>
+                    <p class="text-xs text-right text-gray-500">{{allDetails.invoiceDetails.invoiceNumber}}</p>
+                    <p class="text-xs text-right mt-4 text-gray-700">{{allDetails.fromDetails.address}}</p>
+                    <p class="text-xs text-right text-gray-700">{{allDetails.fromDetails.zip}}, {{allDetails.fromDetails.city}}</p>
+                    <p class="text-xs text-right text-gray-700">{{allDetails.fromDetails.country}}</p>
                 </div>
             </div>
             <div class="flex justify-between mt-6">
@@ -24,14 +24,14 @@
                     <h4 class="text-sm font-semibold outfit-font">Bill To:</h4>
                     <p class="text-xl font-semibold outfit-font">{{allDetails.toDetails.name}}</p>
     
-                    <p class="text-gray-700 text-sm mt-2">{{allDetails.toDetails.address}}</p>
-                    <p class="text-gray-700 text-sm">{{allDetails.toDetails.zip}},{{allDetails.toDetails.city}}</p>
-                    <p class="text-gray-700 text-sm">{{allDetails.toDetails.country}}</p>
+                    <p class="text-gray-700 text-xs mt-2">{{allDetails.toDetails.address}}</p>
+                    <p class="text-gray-700 text-xs">{{allDetails.toDetails.zip}},{{allDetails.toDetails.city}}</p>
+                    <p class="text-gray-700 text-xs">{{allDetails.toDetails.country}}</p>
                     
                 </div>
                 <div>
-                    <p class="text-sm text-gray-700 mt-2 text-right"><span class="font-bold">Invoice Date: </span> {{ allDetails.invoiceDetails.invoiceDate | date: 'MMMM d, yyyy' }}</p>
-                    <p class="text-sm text-gray-700 text-right"><span class="font-bold">Due Date: </span> {{ allDetails.invoiceDetails.dueDate | date: 'MMMM d, yyyy' }}</p>
+                    <p class="text-xs text-gray-700 mt-2 text-right"><span class="font-bold">Invoice Date: </span> {{ allDetails.invoiceDetails.invoiceDate | date: 'MMMM d, yyyy' }}</p>
+                    <p class="text-xs text-gray-700 text-right"><span class="font-bold">Due Date: </span> {{ allDetails.invoiceDetails.dueDate | date: 'MMMM d, yyyy' }}</p>
                 </div>
             </div>
             <div class="border-gray-500 border-[1px] mt-6 rounded-lg py-2">
@@ -41,9 +41,9 @@
                     <p class="basis-1/6">Price</p>
                     <p class="basis-1/6">Amount</p>
                 </div>
-                <div class="w-[98%] m-auto bg-gray-700 h-[1px]"></div>
+                <div class="w-[98%] m-auto bg-gray-300 h-[1px]"></div>
                 <div class="mt-2" *ngFor="let item of allDetails.items">
-                    <div class="flex justify-between px-2 text-sm text-gray-300">
+                    <div class="flex justify-between px-2 text-sm text-gray-700">
                         <div class="flex-grow max-w-[50%]">
                             <p class="font-bold">{{item.name}}</p>
                             <p class="text-xs break-words">{{item.description}}</p>
@@ -56,6 +56,64 @@
     
             </div>
         </div>
+        <div class="flex flex-col items-end mt-4">
+            <div class="flex">
+                <h4 class="font-bold text-sm">Subtotal: &nbsp;&nbsp; </h4> <p class="text-gray-600 text-sm">{{allDetails.summaryDetails.subTotal ? allDetails.summaryDetails.subTotal : '0.0'}} {{allDetails.invoiceDetails.currency ? allDetails.invoiceDetails.currency : 'USD'}}</p>
+            </div>
+            @if (allDetails.summaryDetails.isDiscountValue) {
+                <div class="flex">
+                    <h4 class="font-bold text-sm">Discount: &nbsp;&nbsp; </h4> <p class="text-gray-600 text-sm">- {{allDetails.summaryDetails.discount }} {{allDetails.invoiceDetails.currency ? allDetails.invoiceDetails.currency : 'USD'}}</p>
+                </div>
+            }
+            @if (allDetails.summaryDetails.isTaxValue) {
+                <div class="flex">
+                    <h4 class="font-bold text-sm">Tax: &nbsp;&nbsp; </h4> <p class="text-gray-600 text-sm">+ {{allDetails.summaryDetails.tax}} {{allDetails.invoiceDetails.currency ? allDetails.invoiceDetails.currency : 'USD'}}</p>
+                </div>
+            }
+            @if (allDetails.summaryDetails.isShippingValue) {
+                <div class="flex">
+                    <h4 class="font-bold text-sm">Shipping: &nbsp;&nbsp; </h4> <p class="text-gray-600 text-sm">+ {{allDetails.summaryDetails.shipping}} {{allDetails.invoiceDetails.currency ? allDetails.invoiceDetails.currency : 'USD'}}</p>
+                </div>
+            }
+            <div class="flex">
+                <h4 class="font-bold text-sm">Total: &nbsp;&nbsp; </h4> <p class="text-gray-600 text-sm">{{allDetails.summaryDetails.total ? allDetails.summaryDetails.total : '0.0'}} {{allDetails.invoiceDetails.currency ? allDetails.invoiceDetails.currency : 'USD'}}</p>
+            </div>
+            <div class="flex">
+                <h4 class="font-bold text-sm">Total in words: &nbsp;&nbsp; </h4> <p class="text-gray-600 text-sm">{{allDetails.summaryDetails.isTotalInWords}}</p>
+            </div>
+        </div>
+
+        @if(allDetails.summaryDetails.additionalInfo) {
+            <div class="mt-2">
+                <h4 class="font-bold text-xs mt-4 text-blue-600">Additional Notes:</h4>
+                <p class="text-gray-600 text-xs">{{allDetails.summaryDetails.additionalInfo}}</p>
+            </div>
+        }
+        @if (allDetails.summaryDetails.paymentTerms) {
+            <div class="mt-2">
+                <h4 class="font-bold text-xs mt-4 text-blue-600">Payment Terms:</h4>
+                <p class="text-gray-600 text-xs">{{allDetails.summaryDetails.paymentTerms}}</p>
+            </div>
+        }
+        <div>
+            <h4 class="text-xs mt-2">Please send the payment to this address</h4>
+            <p class="text-gray-800 text-xs font-semibold">Bank: {{allDetails.paymentInfo.bankName}}</p>
+            <p class="text-gray-800 text-xs font-semibold">Account Name: {{allDetails.paymentInfo.accountName}}</p>
+            <p class="text-gray-800 text-xs font-semibold">Account no: {{allDetails.paymentInfo.accountNumber}}</p>
+        </div>
+        <div>
+            @if (allDetails.fromDetails.email) {
+                <p class="text-gray-600 mt-2 text-xs">If you have any questions concerning this invoice, use the following contact information:</p>
+                <p class="text-gray-800 text-xs font-semibold">Email: {{allDetails.fromDetails.email}}</p>
+                <p class="text-gray-800 text-xs font-semibold">Phone: {{allDetails.fromDetails.phone}}</p>
+            }
+        </div>
+        @if (allDetails.summaryDetails.signature) {
+            <div class="mt-4">
+                <h4 class="text-sm">Signature: </h4>
+                <img [src]="allDetails.summaryDetails.signature" alt="" width="100px" height="100px" class="max-w-[100px] max-h-[100px]">
+            </div>
+        }
         }
     
 </div>

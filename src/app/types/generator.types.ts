@@ -35,6 +35,7 @@ export interface AllDetails {
     paymentInfo: PaymentInfo;
     invoiceDetails: InvoiceDetails;
     items: Array<Items>;
+    summaryDetails: Summary;
 };
 
 export interface Items {
@@ -44,4 +45,23 @@ export interface Items {
     price: number;
     total: number;
     description: string;
+}
+
+export type ValueTypes = 'percentage' | 'value';
+export interface Summary {
+    subTotal: number;
+    tax: number;
+    taxType: ValueTypes; 
+    discount: number;
+    discountType: ValueTypes;
+    shipping: number;
+    shippingType: ValueTypes;
+    total: number; 
+    additionalInfo: string;
+    paymentTerms: string;
+    signature?: string;
+    isTaxValue: boolean;
+    isDiscountValue: boolean;
+    isShippingValue: boolean;
+    isTotalInWords: boolean;
 }
