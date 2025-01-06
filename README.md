@@ -1,59 +1,86 @@
-# InvoiceGenerator
+# Invoice Generator Angular Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
+This project is an Angular-based web application designed to generate professional invoices. It allows users to input invoice details and generate a PDF version of the invoice for download or printing.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- **Invoice Form**: Input fields for client information, services/products, quantities, prices, and dates.
+- **PDF Generation**: Creates a PDF of the invoice using client-side processing.
+- **Real-time Preview**: Displays a live preview of the invoice as data is entered.
+- **Responsive Design**: Ensures usability across various devices and screen sizes.
 
-```bash
-ng serve
-```
+## Demo
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+A live demo of the application is available at: [Invoice Generator Demo](https://invoice-generator-angular.vercel.app/)
 
-## Code scaffolding
+## Installation
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+To set up the project locally, follow these steps:
 
-```bash
-ng generate component component-name
-```
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/mumer119131/invoice-generator-angular.git
+    ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+2. **Navigate to the project directory:**
+    ```bash
+    cd invoice-generator-angular
+    ```
 
-```bash
-ng generate --help
-```
+3. **Install dependencies:**
+    Ensure you have Node.js and npm installed. Then run:
+    ```bash
+    npm install
+    ```
 
-## Building
+4. **Start the development server:**
+    ```bash
+    npm start
+    ```
 
-To build the project run:
+5. **Access the application:**
+    Open your browser and navigate to `http://localhost:4200/`.
 
-```bash
-ng build
-```
+## Usage
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+1. **Enter Invoice Details**: Fill in the client information, add items or services, and specify quantities and prices.
+2. **Preview Invoice**: View the real-time preview to ensure accuracy.
+3. **Generate PDF**: Click the "Generate PDF" button to create and download the invoice as a PDF file.
 
-## Running unit tests
+## Technologies Used
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- **Angular**: Framework for building the web application.
+- **PDFMake**: Library for generating PDF documents on the client side.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
 
-```bash
-ng test
-```
+## Contributing
 
-## Running end-to-end tests
+Contributions are welcome! To contribute:
 
-For end-to-end (e2e) testing, run:
+1. **Fork the repository.**
+2. **Create a new branch:**
+    ```bash
+    git checkout -b feature/YourFeatureName
+    ```
+3. **Make your changes.**
+4. **Commit your changes:**
+    ```bash
+    git commit -m 'Add some feature'
+    ```
+5. **Push to the branch:**
+    ```bash
+    git push origin feature/YourFeatureName
+    ```
+6. **Open a pull request.**
 
-```bash
-ng e2e
-```
+## License
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/mumer119131/invoice-generator-angular/blob/main/LICENSE) file for details.
 
-## Additional Resources
+## Acknowledgements
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This project was inspired by the Angular PDFMake Invoice Generator by ngdevelop-tech.
+
+## Contact
+
+For any inquiries or feedback, please contact me.
