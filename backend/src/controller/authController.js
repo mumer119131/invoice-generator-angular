@@ -6,11 +6,11 @@ const decodeJSONWebToken = (token) => {
 }
 
 
-const handleGoogleLogin = (req, res) => {
+const handleGoogleLogin = async (req, res) => {
     
     const {credential} = req.body;
     const user = decodeJSONWebToken(credential);
-    const isAlreadyUser = User.findOne({email: user.email});
+    const isAlreadyUser = await User.findOne({email: user.email});
     if(isAlreadyUser){
         res.cookie('token', credential, {
             httpOnly: true,
@@ -41,7 +41,7 @@ const handleGoogleLogin = (req, res) => {
 
 const handleGoogleLogout = (req, res) => {
     res.clearCookie('token');
-    return res.redirect('http://localhost:4200/login');
+    return res.status(200).json({message: 'Logged out successfully'});
 }
 
 

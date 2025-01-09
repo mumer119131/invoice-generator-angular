@@ -1,10 +1,11 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, inject } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import { ThemeService } from '../../services/theme.service';
 import { isPlatformBrowser } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../types/user';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,7 @@ export class HeaderComponent implements OnInit{
   private userSubscription!: Subscription;
   user : User | null = null;
   isDarkMode = true
+  router = inject(Router)
   constructor(private themeService: ThemeService,
     private authService: AuthService,
     @Inject(PLATFORM_ID) private platformId: Object
@@ -39,9 +41,13 @@ export class HeaderComponent implements OnInit{
     this.userSubscription.unsubscribe();
   }
 
-  logout(){
+  async logout(){
     console.log('logout');
-    this.authService.logout();
+
+    const isLoggedOut = await this.authService.logout();
+    if(isLoggedOut){
+      this.router.navigate(['/login']);
+    }
   }
   toggleTheme(){
     this.isDarkMode = !this.isDarkMode;
