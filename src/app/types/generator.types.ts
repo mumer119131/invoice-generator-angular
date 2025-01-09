@@ -65,3 +65,5 @@ export interface Summary {
     isShippingValue: boolean;
     isTotalInWords: boolean;
 }
+
+

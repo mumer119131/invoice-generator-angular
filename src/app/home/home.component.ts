@@ -1,9 +1,9 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, OnInit, Inject, inject } from '@angular/core';
 import { HeaderComponent } from '../components/header/header.component';
 import { FooterComponent } from '../components/footer/footer.component';
 import { GeneratorComponent } from '../components/generator/generator.component';
 import { PreviewComponent } from '../components/preview/preview.component';
-import { AllDetails, BillingInfo } from '../types/generator.types';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +14,4 @@ import { AllDetails, BillingInfo } from '../types/generator.types';
 
 export class HomeComponent {
 
-
-  
 }

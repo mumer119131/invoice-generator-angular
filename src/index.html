@@ -10,6 +10,19 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body class="dark:bg-black dark:text-white mat-typography">
+  <script>
+    function decodeJWTToken(token) {
+      return JSON.parse(atob(token.split('.')[1]));
+    }
+    function handleCredentialResponse(response) {
+      if (response.credential) {
+        const jwtToken = response.credential;
+        const decodedToken = decodeJWTToken(jwtToken);
+        sessionStorage.setItem('loggedInUser', JSON.stringify(decodedToken));
+        window.location.href = '/';
+      }
+    }
+  </script>
   <script src="https://accounts.google.com/gsi/client" async></script>
   <app-root></app-root>
 </body>
