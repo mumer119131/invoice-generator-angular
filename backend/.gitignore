@@ -45,4 +45,4 @@ Thumbs.db
 
 .env
 .env.localhost
-env.local
+.env.local
