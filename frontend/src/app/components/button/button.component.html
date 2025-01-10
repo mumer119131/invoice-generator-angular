@@ -1,8 +1,7 @@
 <button 
-  [ngClass]="[
-    'border-[1px] border-gray-900 p-2 rounded-lg text-sm outfit-font ',
-    class
-  ]" 
-  (click)="clickHandler($event)">
+  [class]="className"
+  *ngIf="variant === 'cta'"
+  [disabled]="isDisabled"
+  >
   <ng-content></ng-content>
 </button>

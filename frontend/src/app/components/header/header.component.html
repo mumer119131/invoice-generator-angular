@@ -11,9 +11,11 @@
                     }
                 </button>
             </li>
-            <li>
-                <img src={{user?.picture}} alt="" class="w-10 h-10 rounded-full">
-            </li>
+            @if (user?.name) {
+                <li>
+                    <img src={{user?.picture}} alt="" class="w-10 h-10 rounded-full">
+                </li>
+            }
             <li>
                 <button (click)="logout()" class="rounded-xl p-2 flex justify-center items-center">
                         <mat-icon aria-hidden="false" aria-label="Example home icon" class="dark:color-white" fontIcon="logout"></mat-icon>

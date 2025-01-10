@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/auth')
+const invoiceRoutes = require('./routes/invoice')
 const cookiesParser = require('cookie-parser')
 const cors = require('cors')
 // Load environment variables
@@ -27,5 +28,6 @@ app.use(cookiesParser())
 
 // Routes
 app.use('/api/auth', authRoutes)
+app.use('/api/invoice', invoiceRoutes)
 
 module.exports = app;

@@ -3,6 +3,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "typeRoots": ["node_modules/@types", "src/types"],
     "outDir": "./out-tsc/app",
     "types": [
       "node"

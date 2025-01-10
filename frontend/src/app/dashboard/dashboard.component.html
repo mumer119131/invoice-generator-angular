@@ -1,0 +1,11 @@
+<app-header></app-header>
+
+<div class="mt-4">
+    <div class="flex gap-2 items-center justify-between mt-2">
+        <div class="flex gap-2">
+            <input class="dark:bg-black last:border-gray-700 border-[1px] p-2 rounded-lg text-xs" type="text" placeholder="Search"/>
+            <app-button variant="cta">Search</app-button>
+        </div>
+        <app-button variant="cta" class="flex items-center justify-center gap-1" [isDisabled]="isLoadingNewInvoice" (click)="handleNewInvoice()">@if (isLoadingNewInvoice) { <app-spinner></app-spinner> } @else {<mat-icon aria-hidden="false" aria-label="Example home icon" class="dark:text-black text-white" fontIcon="add"></mat-icon>} New Invoice</app-button>
+    </div>
+</div>

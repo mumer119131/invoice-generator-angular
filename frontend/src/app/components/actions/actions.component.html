@@ -1,0 +1,25 @@
+<div class="basis-1/2 flex-grow border-gray-900 border-[1px] p-4 rounded-lg">
+    <h2 class="outfit-font uppercase font-bold text-xl">Actions</h2>
+    <p class="text-xs">Operations to perform on your invoice</p>
+    <div class="flex gap-2 mt-4 justify-center items-center">
+        <div class="flex gap-1 justify-center items-center border-[1px] border-gray-700 px-2 py-1 rounded-md dark:hover:bg-gray-800 hover:bg-gray-100 cursor-pointer">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" class="dark:text-white text-black h-4" fontIcon="system_update_alt"></mat-icon>
+            <p class="text-sm outfit-font">Load Invoice</p>
+        </div>
+        <div class="flex gap-1 justify-center items-center border-[1px] border-gray-700 px-2 py-1 rounded-md dark:hover:bg-gray-800 hover:bg-gray-100 cursor-pointer" (click)="exportInvoice()">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" class="dark:text-white text-black h-4" fontIcon="drive_folder_upload"></mat-icon>
+            <p class="text-sm outfit-font">Export Invoice</p>
+        </div>
+    </div>
+    <div class="flex gap-2 mt-2 justify-center items-center">
+        <div class="flex gap-1 justify-center items-center border-[1px] border-gray-700 px-2 py-1 rounded-md dark:hover:bg-gray-800 hover:bg-gray-100 cursor-pointer">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" class="dark:text-white text-black h-4" fontIcon="add"></mat-icon>
+            <p class="text-sm outfit-font">New Invoice</p>
+        </div>
+        <div class="flex gap-1 justify-center items-center border-[1px] dark:bg-white bg-black text-white dark:text-black border-gray-700 px-2 py-1 rounded-md cursor-pointer" (click)="generatePDF()">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" class="dark:text-black text-white h-4" fontIcon="download"></mat-icon>
+            <p class="text-sm outfit-font">Generate PDF</p>
+        </div>
+    </div>
+    
+</div>

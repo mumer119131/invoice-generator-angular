@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { Router } from 'express';
-declare var google: any;
+import { HeaderComponent } from "../components/header/header.component";
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  imports: [HeaderComponent]
 })
 export class LoginComponent{
   

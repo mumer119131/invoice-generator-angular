@@ -59,7 +59,13 @@ const userSchema = mongoose.Schema({
     "jti": {
         type: String,
         required: true
-    }
+    },
+    "invoices": [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Invoice',
+        required: true
+    }]
+    
 }, {timestamps: true});
 
 

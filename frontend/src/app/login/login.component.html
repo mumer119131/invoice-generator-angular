@@ -1,21 +1,23 @@
-<button id="login-btn" class="login-btn">
-    Login using google
-</button>
+<app-header></app-header>
+<div class="flex justify-center items-center h-screen">
+     <div class="max-w-[20rem] border-[1px] border-gray-600 px-8 py-4 rounded-lg flex flex-col">
+          <h1 class="text-xl font-bold text-center outfit-font uppercase mb-2">Login</h1>
+          <p class="text-xs my-1">Continue with your google account</p>
+          <div id="g_id_onload"
+               data-client_id="927369059480-tt4n66cd8hoa7gcn2m0v2kvlf17j84ap.apps.googleusercontent.com"
+               data-context="use"
+               data-ux_mode="popup"
+               data-login_uri="http://localhost:3000/api/auth/google"
+               data-auto_prompt="false">
+          </div>
 
-<div id="g_id_onload"
-     data-client_id="927369059480-tt4n66cd8hoa7gcn2m0v2kvlf17j84ap.apps.googleusercontent.com"
-     data-context="use"
-     data-ux_mode="popup"
-     data-login_uri="http://localhost:3000/api/auth/google"
-     data-auto_select="true"
-     data-itp_support="true">
-</div>
-
-<div class="g_id_signin"
-     data-type="standard"
-     data-shape="rectangular"
-     data-theme="filled_blue"
-     data-text="signin_with"
-     data-size="large"
-     data-logo_alignment="left">
+          <div class="g_id_signin"
+               data-type="standard"
+               data-shape="pill"
+               data-theme="filled_black"
+               data-text="continue_with"
+               data-size="large"
+               data-logo_alignment="left">
+          </div>
+     </div>
 </div>

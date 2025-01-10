@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { AllDetails, BillingInfo, InvoiceDetails, PaymentInfo } from '../types/generator.types';
-import { get } from 'http';
-import { emit } from 'process';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import axios from 'axios';
 
 @Injectable({
   providedIn: 'root',
@@ -221,4 +222,59 @@ export class InvoiceService {
         throw new Error('Unknown form type');
     }
   }
+
+  generatePDF(): void {
+    const invoiceData = this.invoiceDataSubject.value;
+    console.log(invoiceData);
+    if (!invoiceData) {
+      console.error('No data available for PDF generation');
+      return;
+    }
+
+    const doc = new jsPDF();
+
+    
+  }
+
+
+  exportJSON(): void {
+    const invoiceData = this.invoiceDataSubject.value;
+    if (!invoiceData) {
+      console.error('No data available for JSON export');
+      return;
+    }
+  
+    const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(
+      JSON.stringify(invoiceData, null, 2)
+    )}`;
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute('href', dataStr);
+    downloadAnchorNode.setAttribute('download', 'invoice-data.json');
+    document.body.appendChild(downloadAnchorNode); // required for firefox
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+  }
+
+  loadJSON(file: File): void {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const data = event.target?.result as string;
+      try {
+        const parsedData = JSON.parse(data);
+        this.invoiceDataSubject.next(parsedData);
+      } catch (error) {
+        console.error('Error parsing JSON data', error);
+      }
+    };
+    reader.readAsText(file);
+  }
+
+
+
+  
+
 }
+
+
+
+
