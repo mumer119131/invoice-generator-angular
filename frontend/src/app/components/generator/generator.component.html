@@ -2,9 +2,15 @@
     <h2 class="outfit-font uppercase font-bold text-xl">Invoice</h2>
     <p class="text-xs">Generate Invoices</p>
     <div class="flex gap-2 mt-4">
-        @for (item of menuItems; track item.value) {
-            <app-button (click)="getMenuClickHandler(item.value)" class="{{currentSelectedMenu() === item.value ? 'dark:bg-white dark:text-black bg-black text-white ' : 'dark:hover:bg-gray-900 hover:bg-gray-300'}}">{{item.name}}</app-button>
-        }
+        <div *ngFor="let item of menuItems; trackBy: currentSelectedMenu">
+            <app-button
+              (click)="getMenuClickHandler(item.value)"
+                [variant]="currentSelectedMenu() === item.value ? 'cta' : 'secondary'"
+            >
+              {{ item.name }}
+            </app-button>
+          </div>
+          
 
     </div>
     <div class="mt-4">

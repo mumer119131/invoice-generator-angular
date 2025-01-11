@@ -36,6 +36,10 @@ export interface AllDetails {
     invoiceDetails: InvoiceDetails;
     items: Array<Items>;
     summaryDetails: Summary;
+    user? : string;
+    _id? : string;
+    updatedAt? : string;
+    createdAt? : string;
 };
 
 export interface Items {

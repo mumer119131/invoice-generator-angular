@@ -1,0 +1,23 @@
+
+
+<div class="flex justify-between items-center p-2 hover:bg-gray-50 border-b border-gray-300" routerLink="/invoice/{{ invoice._id }}">
+    <p class="w-[13rem] text-gray-700 text-sm">
+        {{ invoice._id }}
+    </p>
+    <p class="w-[10rem] text-gray-700 text-sm">
+        {{ invoice.fromDetails && invoice.fromDetails.name }}
+    </p>
+    <p class="w-[10rem] text-gray-700 text-sm">
+        {{ invoice.toDetails && invoice.toDetails.name }}
+    </p>
+    <p class="w-[10rem] text-gray-700 text-sm">
+        {{ invoice.summaryDetails && invoice.summaryDetails.subTotal || "0" }}
+        {{ invoice.invoiceDetails && invoice.invoiceDetails.currency || "USD" }}
+    </p>
+    <p *ngIf="invoice" class="w-[10rem] text-gray-700 text-sm">
+        {{ invoice.updatedAt | date:'dd-MM-yyyy' }}
+    </p>
+    <p *ngIf="invoice" class="w-[10rem] text-gray-700 text-sm">
+        {{ invoice.createdAt | date:'dd-MM-yyyy' }}
+    </p>
+</div>

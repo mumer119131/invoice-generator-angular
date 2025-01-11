@@ -7,5 +7,21 @@
             <app-button variant="cta">Search</app-button>
         </div>
         <app-button variant="cta" class="flex items-center justify-center gap-1" [isDisabled]="isLoadingNewInvoice" (click)="handleNewInvoice()">@if (isLoadingNewInvoice) { <app-spinner></app-spinner> } @else {<mat-icon aria-hidden="false" aria-label="Example home icon" class="dark:text-black text-white" fontIcon="add"></mat-icon>} New Invoice</app-button>
+        
     </div>
+
+    <div class="mt-4">
+        <div class="flex justify-between items-center bg-gray-200 p-2 rounded-md font-semibold text-gray-800">
+            <p class="w-[13rem]">Invoice ID</p>
+            <p class="w-[10rem]">From</p>
+            <p class="w-[10rem]">To</p>
+            <p class="w-[10rem]">Amount</p>
+            <p class="w-[10rem]">Updated At</p>
+            <p class="w-[10rem]">Created At</p>
+        </div>
+        @for (invoice of invoices; track $index) {
+            <app-invoice-card [invoice]="invoice"></app-invoice-card>
+        }
+    </div>
+
 </div>

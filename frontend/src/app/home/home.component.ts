@@ -14,5 +14,5 @@ import { ActionsComponent } from "../components/actions/actions.component";
 })
 
 export class HomeComponent {
-
+  
 }

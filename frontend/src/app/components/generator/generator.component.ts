@@ -6,12 +6,13 @@ import { InvoiceDetailsComponent } from '../invoice-details/invoice-details.comp
 import { PaymentInfoComponent } from '../payment-info/payment-info.component';
 import { SummaryComponent } from '../summary/summary.component';
 import { ItemsComponent } from "../../items/items.component";
+import { CommonModule } from '@angular/common';
 
 
 
 @Component({
   selector: 'app-generator',
-  imports: [ButtonComponent, FromAndToComponent, InvoiceDetailsComponent, PaymentInfoComponent, SummaryComponent, ItemsComponent],
+  imports: [ButtonComponent, FromAndToComponent, InvoiceDetailsComponent, PaymentInfoComponent, SummaryComponent, ItemsComponent, CommonModule],
   templateUrl: './generator.component.html',
   styleUrl: './generator.component.scss'
 })
@@ -21,8 +22,10 @@ export class GeneratorComponent{
   currentSelectedMenu = signal<string>('from&to')
 
   getMenuClickHandler(menuItem: MenuItems) {
+       console.log(menuItem)
       this.currentSelectedMenu.set(menuItem)
   }
 
+  
   
 }

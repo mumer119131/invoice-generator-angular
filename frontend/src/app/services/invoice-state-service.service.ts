@@ -5,6 +5,7 @@ import { AllDetails, BillingInfo, InvoiceDetails, PaymentInfo } from '../types/g
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import axios from 'axios';
+import { InvoiceHandlerService } from './invoice-handler.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class InvoiceService {
   private toDetailsForm: FormGroup;
   private itemsForm: FormGroup;
   private summaryDetailsForm: FormGroup;
-
+  private invoiceId = '';
   private invoiceDataSubject = new BehaviorSubject<AllDetails | null>(null);
   invoiceDetails$ = new BehaviorSubject<any>(null);
   paymentInfo$ = new BehaviorSubject<any>(null);
@@ -24,8 +25,11 @@ export class InvoiceService {
   toDetails$ = new BehaviorSubject<any>(null);
   items$ = new BehaviorSubject<any[]>([]);
   summaryDetails$ = new BehaviorSubject<any>(null);
+  
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private invoiceHandleService : InvoiceHandlerService) {
+
+    
     // Initialize forms
     this.invoiceDetailsForm = this.initInvoiceDetailsForm();
     this.paymentInformationForm = this.initPaymentInfoForm();
@@ -57,6 +61,9 @@ export class InvoiceService {
     return this.itemsForm;
   }
 
+  setInvoiceId(id: string) {
+    this.invoiceId = id;
+  }
 
   private initSummaryDetailsForm(): FormGroup {
     return this.fb.group({
@@ -133,6 +140,8 @@ export class InvoiceService {
       summaryDetails: updatedData['summaryDetails'] ?? currentData?.['summaryDetails'] ?? {} as any,
     };
     this.invoiceDataSubject.next(updatedInvoiceData);
+
+    this.invoiceHandleService.saveInvoice(updatedInvoiceData, this.invoiceId);
   }
   setFromData(data: any) {
     this.updateInvoiceData({ from: data });
@@ -270,9 +279,47 @@ export class InvoiceService {
   }
 
 
+  loadInvoiceData(invoiceId: string): void {
+    this.invoiceHandleService.getInvoice(invoiceId).then((invoice) => {
+      if (invoice) {
+      this.invoiceDataSubject.next(invoice);
 
+      // Update forms with new data
+      this.invoiceDetailsForm.patchValue(invoice.invoiceDetails);
+      this.paymentInformationForm.patchValue(invoice.paymentInfo);
+      this.fromDetailsForm.patchValue(invoice.fromDetails);
+      this.toDetailsForm.patchValue(invoice.toDetails);
+      this.summaryDetailsForm.patchValue(invoice.summaryDetails);
+
+      // Clear and repopulate items form array
+      const itemsArray = this.getItemsFormArray();
+      itemsArray.clear();
+      invoice.items.forEach((item: any) => {
+        itemsArray.push(this.fb.group({
+        id: [item.id || null],
+        name: [item.name || '', Validators.required],
+        quantity: [item.quantity || 1, [Validators.required, Validators.min(1)]],
+        price: [item.price || 0, [Validators.required, Validators.min(0)]],
+        total: [{ value: item.total || 0, disabled: true }],
+        description: [item.description || ''],
+        }));
+      });
+      this.updateItems();
+      }
+    });
+  }
   
 
+  reset(){
+    this.invoiceDataSubject.next(null);
+    this.invoiceDetailsForm.reset({}, { emitEvent: false });
+    this.paymentInformationForm.reset({}, { emitEvent: false });
+    this.fromDetailsForm.reset({}, { emitEvent: false });
+    this.toDetailsForm.reset({}, { emitEvent: false });
+    this.itemsForm.reset({}, { emitEvent: false });
+    this.summaryDetailsForm.reset({}, { emitEvent: false });
+    this.getItemsFormArray().clear();
+  }
 }
 
 
