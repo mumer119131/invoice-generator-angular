@@ -22,8 +22,8 @@ if (process.env.NODE_ENV !== 'production') {
   const targetPath = './src/environments/environment.dynamic.ts';
   const envFileContent = `export const environment = {
     production: true,
-    BACKEND_URL: process.env.BACKEND_URL,  // Read from Vercel environment variables
-    OTHER_VAR: process.env.OTHER_VAR  // Example of another environment variable
+    BACKEND_URL: process.env["BACKEND_URL"],  // Read from Vercel environment variables
+    OTHER_VAR: process.env["OTHER_VAR"]  // Example of another environment variable
   };`;
 
   fs.writeFileSync(targetPath, envFileContent);
