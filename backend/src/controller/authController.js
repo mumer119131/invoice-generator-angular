@@ -19,7 +19,7 @@ const handleGoogleLogin = async (req, res) => {
             maxAge: 24 * 60 * 60 * 1000,
             }
         )
-        return res.redirect('http://localhost:4200')
+        return res.redirect('http://localhost:4200/dashboard')
     }
     const userObject = new User(user);
     userObject.save();
@@ -29,11 +29,11 @@ const handleGoogleLogin = async (req, res) => {
         httpOnly: true,
         secure: true,
         sameSite: 'none',
-        maxAge: 24 * 60 * 60 * 1000,
+        maxAge: 24 * 30 * 60 * 60 * 1000,
         }
     )
 
-    return res.redirect('http://localhost:4200')
+    return res.redirect('http://localhost:4200/dashboard')
         
 }
 

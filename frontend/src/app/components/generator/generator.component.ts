@@ -22,7 +22,6 @@ export class GeneratorComponent{
   currentSelectedMenu = signal<string>('from&to')
 
   getMenuClickHandler(menuItem: MenuItems) {
-       console.log(menuItem)
       this.currentSelectedMenu.set(menuItem)
   }
 

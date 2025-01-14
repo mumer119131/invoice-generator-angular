@@ -5,7 +5,19 @@ const authRoutes = require('./routes/auth')
 const invoiceRoutes = require('./routes/invoice')
 const cookiesParser = require('cookie-parser')
 const cors = require('cors')
+const fs = require('fs')
+
+const env = process.env.NODE_ENV || 'development';
+const envFile = `.env.${env}`;
 // Load environment variables
+if(fs.existsSync(envFile)) {
+    dotenv.config({path: envFile});
+    console.log(`Environment file loaded: ${envFile}`);
+}else{
+    console.log('No environment file found. Using .env file');
+    process.exit(1);
+}
+
 dotenv.config();
 
 // Connect to the database
@@ -17,7 +29,7 @@ const app = express();
 // app.use(express.bodyParser())
 
 app.use(cors({
-    origin: "http://localhost:4200",
+    origin: process.env.CLIENT_URL,
     credentials: true
 }))
 app.use(express.urlencoded({extended: true}))

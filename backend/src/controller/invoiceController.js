@@ -42,8 +42,8 @@ const getInvoice = async (req, res) => {
 };
 
 const createInvoice = async (req, res) => {
+    console.log("control here");
     try {
-        
         const user = await User.findOne({email: req.user.email, sub: req.user.sub});
         if (!user) {
             return res.status(400).json({
@@ -51,7 +51,6 @@ const createInvoice = async (req, res) => {
                 message: "User not found"
             });
         }
-        console.log(user, "user");
         const invoice = new Invoice({
             user: user._id
         })
@@ -62,7 +61,8 @@ const createInvoice = async (req, res) => {
         console.error("Error creating invoice:", err);
         return res.status(500).json({
             success: false,
-            message: "Internal server error"
+            message: "Internal server error",
+            error: err
         });
     }
 

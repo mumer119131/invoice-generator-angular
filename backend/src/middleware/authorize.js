@@ -13,7 +13,6 @@ async function authenticate(req, res, next) {
         });
         const payload = ticket.getPayload();
         req.user = payload;
-        console.log(payload);
         next();
     } catch (error) {
         res.clearCookie('token');

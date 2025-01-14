@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment.dynamic';
+
 @Injectable({
   providedIn: 'root'
 })
 export class InvoiceHandlerService {
 
+  private BACKEND_URL = environment.BACKEND_URL;
   constructor(private router: Router) { }
 
 
   async createNewInvoice(): Promise<string | boolean> {
     try{
-      const response = await axios.get('http://localhost:3000/api/invoice/create', {withCredentials: true});
+      console.log(process.env);
+      const response = await axios.get(`${this.BACKEND_URL}/api/invoice/create`, {withCredentials: true});
       if(response.status === 200){
         return response.data.invoice._id;
       }
@@ -24,7 +28,7 @@ export class InvoiceHandlerService {
 
   async getInvoice(invoiceId: string): Promise<any> {
     try{
-      const response = await axios.get(`http://localhost:3000/api/invoice/${invoiceId}`, {withCredentials: true});
+      const response = await axios.get(`${this.BACKEND_URL}/api/invoice/${invoiceId}`, {withCredentials: true});
       if(response.status === 200){
         return response.data.invoice;
       }
@@ -39,7 +43,7 @@ export class InvoiceHandlerService {
     console.log(invoice);
     try{
       
-      const response = await axios.post('http://localhost:3000/api/invoice/save', {invoice, invoiceId}, {withCredentials: true});
+      const response = await axios.post(`${this.BACKEND_URL}/api/invoice/save`, {invoice, invoiceId}, {withCredentials: true});
       if(response.status === 200){
         return true;
       }
@@ -51,7 +55,7 @@ export class InvoiceHandlerService {
 
   async getInvoices(): Promise<any> {
     try{
-      const response = await axios.get('http://localhost:3000/api/invoice/', {withCredentials: true});
+      const response = await axios.get(`${this.BACKEND_URL}/api/invoice/`, {withCredentials: true});
       if(response.status === 200){
         return response.data.invoices;
       }

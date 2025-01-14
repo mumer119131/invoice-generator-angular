@@ -7,7 +7,11 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:invoice-generator": "node dist/invoice-generator/server/server.mjs"
+    "serve:ssr:invoice-generator": "node dist/invoice-generator/server/server.mjs",
+    "start:dev": "cross-env ENV_FILE=.env.development node scripts/env.js && ng serve",
+    "start:prod": "cross-env ENV_FILE=.env.production node scripts/env.js && ng serve",
+    "build:dev": "cross-env ENV_FILE=.env.development node scripts/env.js && ng build",
+    "build:prod": "cross-env ENV_FILE=.env.production node scripts/env.js && ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -24,6 +28,7 @@
     "@angular/router": "^19.0.0",
     "@angular/ssr": "^19.0.6",
     "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
     "express": "^4.18.2",
     "gapi-script": "^1.2.0",
     "html2pdf.js": "^0.10.2",
@@ -43,6 +48,7 @@
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
     "autoprefixer": "^10.4.20",
+    "cross-env": "^7.0.3",
     "jasmine-core": "~5.4.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
