@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthGuardService } from './services/auth-guard.service';
+import { InvoiceComponent } from './invoice/invoice.component';
 
 export const routes: Routes = [{
     path: '',
@@ -15,7 +16,8 @@ export const routes: Routes = [{
     path: 'invoice/:id',
     pathMatch: 'full',
     canActivate: [AuthGuardService],
-    loadComponent: () => import('./invoice/invoice.component').then(m => m.InvoiceComponent)
+    component: InvoiceComponent,
+    
 },
 {
     path: 'dashboard',
