@@ -11,7 +11,7 @@
     "start:dev": "cross-env ENV_FILE=.env.development node scripts/env.js && ng serve",
     "start:prod": "cross-env ENV_FILE=.env.production node scripts/env.js && ng serve",
     "build:dev": "cross-env ENV_FILE=.env.development node scripts/env.js && ng build",
-    "build:prod": "cross-env ENV_FILE=.env.production node scripts/env.js && ng build --prod"
+    "build:prod": "cross-env ENV_FILE=.env.production node scripts/env.js && ng build --configuration production"
   },
   "private": true,
   "dependencies": {
