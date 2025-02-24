@@ -48,3 +48,4 @@ Thumbs.db
 .env.local
 .env*
 src/environments/environment.dynamic.ts
+src/environments/environment.production.ts
